@@ -5,6 +5,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var wallpaperWindows: [WallpaperWindow] = []
     private var mapControllers: [MapViewController] = []
     private var cancellables = Set<AnyCancellable>()
+    private var menuBar: MenuBarController!
     let cityManager = CityManager()
 
     func applicationDidFinishLaunching(_ notification: Notification) {
@@ -16,6 +17,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             name: NSApplication.didChangeScreenParametersNotification,
             object: nil
         )
+
+        menuBar = MenuBarController(cityManager: cityManager)
+
+        cityManager.$cities
+            .dropFirst()
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in self?.refreshCities() }
+            .store(in: &cancellables)
     }
 
     private func setupWallpaperWindows() {
