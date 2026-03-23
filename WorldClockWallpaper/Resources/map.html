@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; background: #0d0d0d; overflow: hidden; }
+  svg { display: block; }
+
+  .city-label {
+    font-family: -apple-system, "SF Pro Display", sans-serif;
+    fill: #e8e8e8;
+    font-size: 12px;
+    pointer-events: none;
+  }
+  .city-time {
+    font-family: -apple-system, "SF Pro Display", sans-serif;
+    fill: #f0c040;
+    font-size: 13px;
+    font-weight: 600;
+    pointer-events: none;
+  }
+  .city-dot { fill: #f0c040; }
+</style>
+</head>
+<body>
+<svg id="map"></svg>
+<script src="d3.v7.min.js"></script>
+<script src="topojson.v3.min.js"></script>
+<script src="suncalc.js"></script>
+<script>
+// ── State ────────────────────────────────────────────────────────────────────
+let cities = [];
+let worldData = null;
+
+let width = window.innerWidth;
+let height = window.innerHeight;
+
+const svg = d3.select("#map")
+  .attr("width", width)
+  .attr("height", height);
+
+const projection = d3.geoNaturalEarth1()
+  .scale(width / 6.2)
+  .translate([width / 2, height / 2]);
+
+const path = d3.geoPath().projection(projection);
+
+// Layers (back → front)
+const nightLayer  = svg.append("g").attr("id", "night");
+const landLayer   = svg.append("g").attr("id", "land");
+const borderLayer = svg.append("g").attr("id", "borders");
+const cityLayer   = svg.append("g").attr("id", "cities");
+
+// ── Night polygon ─────────────────────────────────────────────────────────────
+// Use d3.geoCircle centered on the antisolar point (the point opposite the sun).
+// A circle of radius 90° around the antisolar point exactly equals the night hemisphere.
+function getAntisolarPoint(date) {
+  // Compute antisolar point using UTC time and simplified declination formula.
+  const utHours = date.getUTCHours() + date.getUTCMinutes() / 60 + date.getUTCSeconds() / 3600;
+  const solarLon = (180 - (utHours - 12) * 15);
+
+  // Solar declination
+  const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 86400000);
+  const declination = -23.45 * Math.cos((2 * Math.PI / 365) * (dayOfYear + 10));
+
+  // Antisolar point is directly opposite
+  const antiLon = ((solarLon + 180 + 540) % 360) - 180;
+  const antiLat = -declination;
+  return [antiLon, antiLat];
+}
+
+function drawNight(date) {
+  nightLayer.selectAll("*").remove();
+  const [lon, lat] = getAntisolarPoint(date);
+  const nightCircle = d3.geoCircle().center([lon, lat]).radius(90)();
+  nightLayer.append("path")
+    .datum(nightCircle)
+    .attr("d", path)
+    .attr("fill", "rgba(0, 0, 25, 0.68)");
+}
+
+// ── Land + borders ────────────────────────────────────────────────────────────
+function drawLand() {
+  landLayer.selectAll("*").remove();
+  borderLayer.selectAll("*").remove();
+  const countries = topojson.feature(worldData, worldData.objects.countries);
+  const borders   = topojson.mesh(worldData, worldData.objects.countries,
+                                  (a, b) => a !== b);
+  landLayer.selectAll("path.country")
+    .data(countries.features)
+    .enter().append("path")
+      .attr("class", "country")
+      .attr("d", path)
+      .attr("fill", "#2a2a2a")
+      .attr("stroke", "none");
+
+  borderLayer.append("path")
+    .datum(borders)
+    .attr("d", path)
+    .attr("fill", "none")
+    .attr("stroke", "#444")
+    .attr("stroke-width", 0.4);
+}
+
+// ── City pins ─────────────────────────────────────────────────────────────────
+function drawCities() {
+  cityLayer.selectAll("*").remove();
+  cities.forEach(city => {
+    const projected = projection([city.lon, city.lat]);
+    if (!projected) return;
+    const [x, y] = projected;
+
+    const g = cityLayer.append("g").attr("transform", `translate(${x},${y})`);
+    g.append("circle").attr("class", "city-dot").attr("r", 4);
+    g.append("text").attr("class", "city-label")
+      .attr("dx", 8).attr("dy", -5)
+      .text(city.name);
+    g.append("text").attr("class", "city-time")
+      .attr("dx", 8).attr("dy", 10)
+      .attr("data-tz", city.timezone)
+      .text(localTime(city.timezone));
+  });
+}
+
+function updateTimes() {
+  cityLayer.selectAll("text[data-tz]").each(function() {
+    d3.select(this).text(localTime(this.dataset.tz));
+  });
+}
+
+function localTime(timezone) {
+  try {
+    return new Date().toLocaleTimeString("en-GB", {
+      timeZone: timezone, hour: "2-digit", minute: "2-digit"
+    });
+  } catch { return "--:--"; }
+}
+
+// ── Full redraw ───────────────────────────────────────────────────────────────
+function draw() {
+  if (!worldData) return;
+  drawNight(new Date());
+  drawLand();
+  drawCities();
+}
+
+// ── Load world data ───────────────────────────────────────────────────────────
+d3.json("world-110m.json").then(data => {
+  worldData = data;
+  draw();
+  setInterval(() => drawNight(new Date()), 60000); // night zone every 1 min
+  setInterval(updateTimes, 1000);                  // clock digits every 1 sec
+});
+
+// ── Resize ────────────────────────────────────────────────────────────────────
+window.addEventListener("resize", () => {
+  width = window.innerWidth; height = window.innerHeight;
+  svg.attr("width", width).attr("height", height);
+  projection.scale(width / 6.2).translate([width / 2, height / 2]);
+  draw();
+});
+
+// ── Swift ↔ JS bridge ─────────────────────────────────────────────────────────
+// Swift calls window.updateCities(jsonArray) to push city list
+window.updateCities = function(newCities) {
+  cities = newCities;
+  drawCities();
+};
+
+// Notify Swift that the page is ready — Swift will respond with updateCities()
+window.webkit?.messageHandlers?.cityBridge?.postMessage("requestCities");
+</script>
+</body>
+</html>
