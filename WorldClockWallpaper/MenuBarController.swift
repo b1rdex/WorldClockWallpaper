@@ -11,6 +11,12 @@ final class MenuBarController: NSObject {
         setupPopover(cityManager: cityManager)
     }
 
+    deinit {
+        if popover.isShown {
+            popover.performClose(nil)
+        }
+    }
+
     private func setupStatusItem() {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         if let button = statusItem.button {

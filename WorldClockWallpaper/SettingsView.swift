@@ -4,6 +4,7 @@ import ServiceManagement
 struct SettingsView: View {
     @ObservedObject var cityManager: CityManager
     @State private var showingAdd = false
+    @State private var tick = Date()
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -19,6 +20,9 @@ struct SettingsView: View {
             footerView
         }
         .frame(width: 300)
+        .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()) { _ in
+            tick = Date()
+        }
     }
 
     private var cityListView: some View {
@@ -39,7 +43,7 @@ struct SettingsView: View {
             }
             .onMove { cityManager.move(fromOffsets: $0, toOffset: $1) }
         }
-        .frame(height: min(CGFloat(cityManager.cities.count) * 44 + 8, 280))
+        .frame(height: min(max(CGFloat(cityManager.cities.count) * 44 + 8, 44), 280))
     }
 
     private var footerView: some View {
@@ -89,8 +93,8 @@ struct AddCityForm: View {
             TextField("City name (e.g. Paris)", text: $name)
             TextField("Timezone (e.g. Europe/Paris)", text: $timezone)
             HStack {
-                TextField("Latitude", text: $lat)
-                TextField("Longitude", text: $lon)
+                TextField("Latitude (e.g. 48.85)", text: $lat)
+                TextField("Longitude (e.g. 2.35)", text: $lon)
             }
             HStack {
                 Button("Cancel") { isShowing = false }
@@ -104,7 +108,13 @@ struct AddCityForm: View {
                     ))
                     isShowing = false
                 }
-                .disabled(name.isEmpty || timezone.isEmpty)
+                .disabled(
+                    name.isEmpty ||
+                    timezone.isEmpty ||
+                    TimeZone(identifier: timezone) == nil ||
+                    Double(lat) == nil ||
+                    Double(lon) == nil
+                )
                 .keyboardShortcut(.return)
             }
         }
