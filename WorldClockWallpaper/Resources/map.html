@@ -56,17 +56,24 @@ const cityLayer   = svg.append("g").attr("id", "cities");
 // Use d3.geoCircle centered on the antisolar point (the point opposite the sun).
 // A circle of radius 90° around the antisolar point exactly equals the night hemisphere.
 function getAntisolarPoint(date) {
-  // Compute antisolar point using UTC time and simplified declination formula.
-  const utHours = date.getUTCHours() + date.getUTCMinutes() / 60 + date.getUTCSeconds() / 3600;
-  const solarLon = (180 - (utHours - 12) * 15);
+  // Get solar noon time at lon=0 — encodes the equation of time correction.
+  const times  = SunCalc.getTimes(date, 0, 0);
+  const noonUTC = times.solarNoon.getUTCHours() +
+                  times.solarNoon.getUTCMinutes() / 60 +
+                  times.solarNoon.getUTCSeconds() / 3600;
+  const nowUTC  = date.getUTCHours() + date.getUTCMinutes() / 60 +
+                  date.getUTCSeconds() / 3600;
 
-  // Solar declination
-  const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / 86400000);
-  const declination = -23.45 * Math.cos((2 * Math.PI / 365) * (dayOfYear + 10));
+  // Meridian where it is currently solar noon = subsolar longitude
+  const subsolarLon = ((noonUTC - nowUTC) * 15 + 180 + 360) % 360 - 180;
 
-  // Antisolar point is directly opposite
-  const antiLon = ((solarLon + 180 + 540) % 360) - 180;
-  const antiLat = -declination;
+  // At the subsolar longitude and lat=0, hour angle=0, so sun altitude = declination
+  const pos = SunCalc.getPosition(date, 0, subsolarLon);
+  const subsolarLat = pos.altitude * (180 / Math.PI);
+
+  // Antisolar point is the antipode of the subsolar point
+  const antiLon = ((subsolarLon + 180) + 540) % 360 - 180;
+  const antiLat = -subsolarLat;
   return [antiLon, antiLat];
 }
 
@@ -115,7 +122,7 @@ function drawCities() {
     g.append("circle").attr("class", "city-dot").attr("r", 4);
     g.append("text").attr("class", "city-label")
       .attr("dx", 8).attr("dy", -5)
-      .text(city.name);
+      .text(city.name ?? "");
     g.append("text").attr("class", "city-time")
       .attr("dx", 8).attr("dy", 10)
       .attr("data-tz", city.timezone)
@@ -151,14 +158,26 @@ d3.json("world-110m.json").then(data => {
   draw();
   setInterval(() => drawNight(new Date()), 60000); // night zone every 1 min
   setInterval(updateTimes, 1000);                  // clock digits every 1 sec
+}).catch(err => {
+  console.error("Failed to load world-110m.json:", err);
+  svg.append("text")
+    .attr("x", width / 2).attr("y", height / 2)
+    .attr("text-anchor", "middle")
+    .attr("fill", "#f44")
+    .attr("font-size", "18px")
+    .text("Map data failed to load");
 });
 
 // ── Resize ────────────────────────────────────────────────────────────────────
+let resizeTimer;
 window.addEventListener("resize", () => {
-  width = window.innerWidth; height = window.innerHeight;
-  svg.attr("width", width).attr("height", height);
-  projection.scale(width / 6.2).translate([width / 2, height / 2]);
-  draw();
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    width = window.innerWidth; height = window.innerHeight;
+    svg.attr("width", width).attr("height", height);
+    projection.scale(width / 6.2).translate([width / 2, height / 2]);
+    draw();
+  }, 100);
 });
 
 // ── Swift ↔ JS bridge ─────────────────────────────────────────────────────────
