@@ -1,0 +1,47 @@
+name: WorldClockWallpaper
+options:
+  bundleIdPrefix: com.worldclockwallpaper
+  deploymentTarget:
+    macOS: "13.0"
+  xcodeVersion: "15.0"
+  createIntermediateGroups: true
+
+targets:
+  WorldClockWallpaper:
+    type: application
+    platform: macOS
+    deploymentTarget: "13.0"
+    sources:
+      - path: WorldClockWallpaper
+        excludes:
+          - "**/*.md"
+    resources:
+      - path: WorldClockWallpaper/Resources
+        optional: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.worldclockwallpaper.WorldClockWallpaper
+        SWIFT_VERSION: 5.9
+        MACOSX_DEPLOYMENT_TARGET: "13.0"
+        INFOPLIST_FILE: WorldClockWallpaper/Info.plist
+        CODE_SIGN_STYLE: Automatic
+        ENABLE_HARDENED_RUNTIME: YES
+    dependencies:
+      - sdk: WebKit.framework
+      - sdk: Combine.framework
+      - sdk: ServiceManagement.framework
+
+  WorldClockWallpaperTests:
+    type: bundle.unit-test
+    platform: macOS
+    deploymentTarget: "13.0"
+    sources:
+      - path: WorldClockWallpaperTests
+    settings:
+      base:
+        SWIFT_VERSION: 5.9
+        MACOSX_DEPLOYMENT_TARGET: "13.0"
+        TEST_HOST: $(BUILT_PRODUCTS_DIR)/WorldClockWallpaper.app/Contents/MacOS/WorldClockWallpaper
+        BUNDLE_LOADER: $(TEST_HOST)
+    dependencies:
+      - target: WorldClockWallpaper

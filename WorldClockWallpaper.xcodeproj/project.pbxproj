@@ -1,0 +1,429 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		40DB99A3609A66504098BA42 /* Combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6939881C455F847AF244E1 /* Combine.framework */; };
+		6732B41A2B65D4D7A72C9AE5 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20456FF87A18051A10A60EEB /* ServiceManagement.framework */; };
+		A415DF320BC9AAFBBFE858C1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6845C7EEBB753FD6B4B4A8EA /* WebKit.framework */; };
+		B81B370DCB98AE26BED982FE /* WorldClockWallpaperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D42DD708F73CBF6601572EF /* WorldClockWallpaperTests.swift */; };
+		CA28331888B72D140E4E0765 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A3C5C144098D18292A12DE /* AppDelegate.swift */; };
+		FD4F002D8BBD6EC8A2B7AB0E /* WorldClockWallpaperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5058ADD5424F65D3813689 /* WorldClockWallpaperApp.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9A0542641BD5ACC551A20387 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E51CFC66DA2F70B8D64FDC7D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A387AE2E555C5AB5B9CA06CB;
+			remoteInfo = WorldClockWallpaper;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1DD1DFDB9501E551D96C319B /* WorldClockWallpaper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorldClockWallpaper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		20456FF87A18051A10A60EEB /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		5D42DD708F73CBF6601572EF /* WorldClockWallpaperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldClockWallpaperTests.swift; sourceTree = "<group>"; };
+		6028E5125410F2AA516DAF8C /* WorldClockWallpaperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorldClockWallpaperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6845C7EEBB753FD6B4B4A8EA /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		9AEA811509C4D3B990738F5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		BB6939881C455F847AF244E1 /* Combine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Combine.framework; path = System/Library/Frameworks/Combine.framework; sourceTree = SDKROOT; };
+		D6A3C5C144098D18292A12DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		FE5058ADD5424F65D3813689 /* WorldClockWallpaperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldClockWallpaperApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F19215AE4BF9E0745D217452 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A415DF320BC9AAFBBFE858C1 /* WebKit.framework in Frameworks */,
+				40DB99A3609A66504098BA42 /* Combine.framework in Frameworks */,
+				6732B41A2B65D4D7A72C9AE5 /* ServiceManagement.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		05E92C4C0951429CC71949E7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1DD1DFDB9501E551D96C319B /* WorldClockWallpaper.app */,
+				6028E5125410F2AA516DAF8C /* WorldClockWallpaperTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7017CFCE5CDDD9BC1F1CE4F0 /* WorldClockWallpaperTests */ = {
+			isa = PBXGroup;
+			children = (
+				5D42DD708F73CBF6601572EF /* WorldClockWallpaperTests.swift */,
+			);
+			path = WorldClockWallpaperTests;
+			sourceTree = "<group>";
+		};
+		A2F1061067749E1306E05898 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BB6939881C455F847AF244E1 /* Combine.framework */,
+				20456FF87A18051A10A60EEB /* ServiceManagement.framework */,
+				6845C7EEBB753FD6B4B4A8EA /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AE114256C76C778CD45E4E80 = {
+			isa = PBXGroup;
+			children = (
+				CD322FFD0FB66D2408C7EFA0 /* WorldClockWallpaper */,
+				7017CFCE5CDDD9BC1F1CE4F0 /* WorldClockWallpaperTests */,
+				A2F1061067749E1306E05898 /* Frameworks */,
+				05E92C4C0951429CC71949E7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CD322FFD0FB66D2408C7EFA0 /* WorldClockWallpaper */ = {
+			isa = PBXGroup;
+			children = (
+				D6A3C5C144098D18292A12DE /* AppDelegate.swift */,
+				9AEA811509C4D3B990738F5E /* Info.plist */,
+				FE5058ADD5424F65D3813689 /* WorldClockWallpaperApp.swift */,
+			);
+			path = WorldClockWallpaper;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		599368018204CCA8A59D2017 /* WorldClockWallpaperTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 337FBF808B1F1891550896B2 /* Build configuration list for PBXNativeTarget "WorldClockWallpaperTests" */;
+			buildPhases = (
+				66E1F64380ED96D70DC664A5 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				03BDD5C2BF125DB45508233E /* PBXTargetDependency */,
+			);
+			name = WorldClockWallpaperTests;
+			packageProductDependencies = (
+			);
+			productName = WorldClockWallpaperTests;
+			productReference = 6028E5125410F2AA516DAF8C /* WorldClockWallpaperTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A387AE2E555C5AB5B9CA06CB /* WorldClockWallpaper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5782CEC64A7974B13B854AC2 /* Build configuration list for PBXNativeTarget "WorldClockWallpaper" */;
+			buildPhases = (
+				A4040581AD978680C048C184 /* Sources */,
+				F19215AE4BF9E0745D217452 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WorldClockWallpaper;
+			packageProductDependencies = (
+			);
+			productName = WorldClockWallpaper;
+			productReference = 1DD1DFDB9501E551D96C319B /* WorldClockWallpaper.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E51CFC66DA2F70B8D64FDC7D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					A387AE2E555C5AB5B9CA06CB = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 44D3BF958FE079FC7E1B15B1 /* Build configuration list for PBXProject "WorldClockWallpaper" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = AE114256C76C778CD45E4E80;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 05E92C4C0951429CC71949E7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A387AE2E555C5AB5B9CA06CB /* WorldClockWallpaper */,
+				599368018204CCA8A59D2017 /* WorldClockWallpaperTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		66E1F64380ED96D70DC664A5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B81B370DCB98AE26BED982FE /* WorldClockWallpaperTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A4040581AD978680C048C184 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA28331888B72D140E4E0765 /* AppDelegate.swift in Sources */,
+				FD4F002D8BBD6EC8A2B7AB0E /* WorldClockWallpaperApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		03BDD5C2BF125DB45508233E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A387AE2E555C5AB5B9CA06CB /* WorldClockWallpaper */;
+			targetProxy = 9A0542641BD5ACC551A20387 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		268D945EF114B30DAE478E14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		4DD16DC4D7F898B311FD38D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = WorldClockWallpaper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.worldclockwallpaper.WorldClockWallpaper;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		6878A803EB75012346B66C0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.worldclockwallpaper.WorldClockWallpaperTests;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WorldClockWallpaper.app/Contents/MacOS/WorldClockWallpaper";
+			};
+			name = Debug;
+		};
+		73040879AF47E2CEA8AFB19F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.worldclockwallpaper.WorldClockWallpaperTests;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WorldClockWallpaper.app/Contents/MacOS/WorldClockWallpaper";
+			};
+			name = Release;
+		};
+		844B6B55A7DF4E9CEF1678A9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = WorldClockWallpaper/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.worldclockwallpaper.WorldClockWallpaper;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		B40A65A3AC06F40A8F97FBA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		337FBF808B1F1891550896B2 /* Build configuration list for PBXNativeTarget "WorldClockWallpaperTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6878A803EB75012346B66C0E /* Debug */,
+				73040879AF47E2CEA8AFB19F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		44D3BF958FE079FC7E1B15B1 /* Build configuration list for PBXProject "WorldClockWallpaper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B40A65A3AC06F40A8F97FBA7 /* Debug */,
+				268D945EF114B30DAE478E14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5782CEC64A7974B13B854AC2 /* Build configuration list for PBXNativeTarget "WorldClockWallpaper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4DD16DC4D7F898B311FD38D6 /* Debug */,
+				844B6B55A7DF4E9CEF1678A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E51CFC66DA2F70B8D64FDC7D /* Project object */;
+}
