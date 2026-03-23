@@ -6,6 +6,10 @@ options:
   xcodeVersion: "15.0"
   createIntermediateGroups: true
 
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+
 targets:
   WorldClockWallpaper:
     type: application
