@@ -47,5 +47,6 @@ targets:
         MACOSX_DEPLOYMENT_TARGET: "13.0"
         TEST_HOST: $(BUILT_PRODUCTS_DIR)/WorldClockWallpaper.app/Contents/MacOS/WorldClockWallpaper
         BUNDLE_LOADER: $(TEST_HOST)
+        GENERATE_INFOPLIST_FILE: YES
     dependencies:
       - target: WorldClockWallpaper

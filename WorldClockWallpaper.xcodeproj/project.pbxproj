@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0CAC55DC5F4AAE99C7BDE851 /* CityManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEAFC2FE0BD1F812177A75C /* CityManagerTests.swift */; };
+		33A0D5342F9486793D50F23E /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAAAAFB08CBB1C52F3B09 /* City.swift */; };
 		40DB99A3609A66504098BA42 /* Combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6939881C455F847AF244E1 /* Combine.framework */; };
 		6732B41A2B65D4D7A72C9AE5 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20456FF87A18051A10A60EEB /* ServiceManagement.framework */; };
+		7A479EBBEC2C3780B741B716 /* CityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECADEFAE9FB661D5666631F /* CityManager.swift */; };
+		8451F19A5BBBC4FD750CE2FB /* CityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F1C9EAA39F77F87FAD7940 /* CityTests.swift */; };
 		A415DF320BC9AAFBBFE858C1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6845C7EEBB753FD6B4B4A8EA /* WebKit.framework */; };
 		B81B370DCB98AE26BED982FE /* WorldClockWallpaperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D42DD708F73CBF6601572EF /* WorldClockWallpaperTests.swift */; };
 		CA28331888B72D140E4E0765 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A3C5C144098D18292A12DE /* AppDelegate.swift */; };
@@ -28,12 +32,16 @@
 /* Begin PBXFileReference section */
 		1DD1DFDB9501E551D96C319B /* WorldClockWallpaper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorldClockWallpaper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20456FF87A18051A10A60EEB /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		2CEAFC2FE0BD1F812177A75C /* CityManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityManagerTests.swift; sourceTree = "<group>"; };
+		31F1C9EAA39F77F87FAD7940 /* CityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTests.swift; sourceTree = "<group>"; };
 		5D42DD708F73CBF6601572EF /* WorldClockWallpaperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldClockWallpaperTests.swift; sourceTree = "<group>"; };
 		6028E5125410F2AA516DAF8C /* WorldClockWallpaperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorldClockWallpaperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6845C7EEBB753FD6B4B4A8EA /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		9AEA811509C4D3B990738F5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BB6939881C455F847AF244E1 /* Combine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Combine.framework; path = System/Library/Frameworks/Combine.framework; sourceTree = SDKROOT; };
 		D6A3C5C144098D18292A12DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D87CAAAAFB08CBB1C52F3B09 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		DECADEFAE9FB661D5666631F /* CityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityManager.swift; sourceTree = "<group>"; };
 		FE5058ADD5424F65D3813689 /* WorldClockWallpaperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldClockWallpaperApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,6 +71,8 @@
 		7017CFCE5CDDD9BC1F1CE4F0 /* WorldClockWallpaperTests */ = {
 			isa = PBXGroup;
 			children = (
+				2CEAFC2FE0BD1F812177A75C /* CityManagerTests.swift */,
+				31F1C9EAA39F77F87FAD7940 /* CityTests.swift */,
 				5D42DD708F73CBF6601572EF /* WorldClockWallpaperTests.swift */,
 			);
 			path = WorldClockWallpaperTests;
@@ -92,6 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				D6A3C5C144098D18292A12DE /* AppDelegate.swift */,
+				D87CAAAAFB08CBB1C52F3B09 /* City.swift */,
+				DECADEFAE9FB661D5666631F /* CityManager.swift */,
 				9AEA811509C4D3B990738F5E /* Info.plist */,
 				FE5058ADD5424F65D3813689 /* WorldClockWallpaperApp.swift */,
 			);
@@ -176,6 +188,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CAC55DC5F4AAE99C7BDE851 /* CityManagerTests.swift in Sources */,
+				8451F19A5BBBC4FD750CE2FB /* CityTests.swift in Sources */,
 				B81B370DCB98AE26BED982FE /* WorldClockWallpaperTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -185,6 +199,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA28331888B72D140E4E0765 /* AppDelegate.swift in Sources */,
+				33A0D5342F9486793D50F23E /* City.swift in Sources */,
+				7A479EBBEC2C3780B741B716 /* CityManager.swift in Sources */,
 				FD4F002D8BBD6EC8A2B7AB0E /* WorldClockWallpaperApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,6 +296,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -298,6 +315,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
