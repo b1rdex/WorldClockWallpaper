@@ -27,7 +27,6 @@
 <svg id="map"></svg>
 <script src="d3.v7.min.js"></script>
 <script src="topojson.v3.min.js"></script>
-<script src="suncalc.js"></script>
 <script>
 // ── State ────────────────────────────────────────────────────────────────────
 let cities = [];
@@ -56,24 +55,15 @@ const cityLayer   = svg.append("g").attr("id", "cities");
 // Use d3.geoCircle centered on the antisolar point (the point opposite the sun).
 // A circle of radius 90° around the antisolar point exactly equals the night hemisphere.
 function getAntisolarPoint(date) {
-  // Get solar noon time at lon=0 — encodes the equation of time correction.
-  const times  = SunCalc.getTimes(date, 0, 0);
-  const noonUTC = times.solarNoon.getUTCHours() +
-                  times.solarNoon.getUTCMinutes() / 60 +
-                  times.solarNoon.getUTCSeconds() / 3600;
-  const nowUTC  = date.getUTCHours() + date.getUTCMinutes() / 60 +
-                  date.getUTCSeconds() / 3600;
-
-  // Meridian where it is currently solar noon = subsolar longitude
-  const subsolarLon = ((noonUTC - nowUTC) * 15 + 180 + 360) % 360 - 180;
-
-  // At the subsolar longitude and lat=0, hour angle=0, so sun altitude = declination
-  const pos = SunCalc.getPosition(date, 0, subsolarLon);
-  const subsolarLat = pos.altitude * (180 / Math.PI);
-
+  const utHours = date.getUTCHours() + date.getUTCMinutes() / 60 + date.getUTCSeconds() / 3600;
+  // Longitude where it is solar noon right now (subsolar longitude)
+  const subsolarLon = (180 - (utHours - 12) * 15 + 360) % 360 - 180;
+  // Solar declination via day-of-year approximation (±23.45°, peaks at summer/winter solstice)
+  const dayOfYear = Math.floor((date - new Date(Date.UTC(date.getUTCFullYear(), 0, 0))) / 86400000);
+  const declination = 23.45 * Math.sin((2 * Math.PI / 365) * (dayOfYear - 81));
   // Antisolar point is the antipode of the subsolar point
   const antiLon = ((subsolarLon + 180) + 540) % 360 - 180;
-  const antiLat = -subsolarLat;
+  const antiLat = -declination;
   return [antiLon, antiLat];
 }
 
@@ -153,20 +143,14 @@ function draw() {
 }
 
 // ── Load world data ───────────────────────────────────────────────────────────
-d3.json("world-110m.json").then(data => {
+// Swift injects map data via window.initMap(topoJsonObject) to avoid
+// file:// fetch restrictions in WKWebView (both sandboxed and non-sandboxed).
+window.initMap = function(data) {
   worldData = data;
   draw();
   setInterval(() => drawNight(new Date()), 60000); // night zone every 1 min
   setInterval(updateTimes, 1000);                  // clock digits every 1 sec
-}).catch(err => {
-  console.error("Failed to load world-110m.json:", err);
-  svg.append("text")
-    .attr("x", width / 2).attr("y", height / 2)
-    .attr("text-anchor", "middle")
-    .attr("fill", "#f44")
-    .attr("font-size", "18px")
-    .text("Map data failed to load");
-});
+};
 
 // ── Resize ────────────────────────────────────────────────────────────────────
 let resizeTimer;
