@@ -1,7 +1,14 @@
 import AppKit
 import WebKit
 
-/// Breaks the retain cycle between WKUserContentController and WKScriptMessageHandler.
+/// Breaks the retain cycle between WKUserContentController and its script message handler.
+///
+/// WKUserContentController holds a **strong** reference to every registered
+/// WKScriptMessageHandler. If MapViewController were registered directly, the
+/// controller (owned by the WKWebViewConfiguration / WKWebView) would keep
+/// MapViewController alive indefinitely, preventing it from being deallocated.
+/// This lightweight wrapper holds only a weak reference to the real delegate,
+/// so the cycle is broken and both objects can be released normally.
 private final class WeakScriptMessageHandler: NSObject, WKScriptMessageHandler {
     weak var delegate: (NSObject & WKScriptMessageHandler)?
 
@@ -16,6 +23,10 @@ private final class WeakScriptMessageHandler: NSObject, WKScriptMessageHandler {
 }
 
 final class MapViewController: NSViewController, WKScriptMessageHandler, WKNavigationDelegate {
+
+    private static let scriptTagPattern = try! NSRegularExpression(
+        pattern: #"<script src="([^"]+\.js)"></script>"#
+    )
 
     private var webView: WKWebView!
 
@@ -47,11 +58,8 @@ final class MapViewController: NSViewController, WKScriptMessageHandler, WKNavig
         // Inline every <script src="filename.js"></script> from the bundle.
         // This is required under App Sandbox: WKWebView's WebContent process cannot
         // read file:// URLs from the app bundle, but Swift can.
-        let scriptPattern = try! NSRegularExpression(
-            pattern: #"<script src="([^"]+\.js)"></script>"#
-        )
         let range = NSRange(html.startIndex..., in: html)
-        let matches = scriptPattern.matches(in: html, range: range)
+        let matches = Self.scriptTagPattern.matches(in: html, range: range)
 
         // Process in reverse order so string offsets stay valid
         for match in matches.reversed() {
@@ -65,7 +73,7 @@ final class MapViewController: NSViewController, WKScriptMessageHandler, WKNavig
             html.replaceSubrange(fullMatchRange, with: "<script>\(src)</script>")
         }
 
-        webView.loadHTMLString(html, baseURL: Bundle.main.resourceURL)
+        webView.loadHTMLString(html, baseURL: nil)
     }
 
     // MARK: - WKNavigationDelegate
@@ -76,7 +84,6 @@ final class MapViewController: NSViewController, WKScriptMessageHandler, WKNavig
 
     func webView(_ webView: WKWebView, didFinish _: WKNavigation!) {
         injectWorldData()
-        pushCitiesToJS()
     }
 
     /// Reads world-110m.json from the bundle in Swift (no file:// fetch in WebView)
