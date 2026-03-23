@@ -11,6 +11,12 @@ final class CityManagerTests: XCTestCase {
         sut = CityManager(storageKey: testKey)
     }
 
+    override func tearDown() {
+        UserDefaults.standard.removeObject(forKey: testKey)
+        sut = nil
+        super.tearDown()
+    }
+
     func test_defaultCities_areNotEmpty() {
         XCTAssertFalse(sut.cities.isEmpty)
     }
@@ -33,5 +39,13 @@ final class CityManagerTests: XCTestCase {
         sut.add(city)
         let reloaded = CityManager(storageKey: testKey)
         XCTAssertTrue(reloaded.cities.contains(where: { $0.id == city.id }))
+    }
+
+    func test_moveCity_changesOrder() {
+        // Start with default cities; move the first to position 2
+        let nameAtZero = sut.cities[0].name
+        sut.move(fromOffsets: IndexSet([0]), toOffset: 2)
+        XCTAssertNotEqual(sut.cities[0].name, nameAtZero)
+        XCTAssertEqual(sut.cities[1].name, nameAtZero)
     }
 }

@@ -1,6 +1,5 @@
 import Foundation
 import Combine
-import SwiftUI
 
 final class CityManager: ObservableObject {
     @Published private(set) var cities: [City]
@@ -26,8 +25,14 @@ final class CityManager: ObservableObject {
         persist()
     }
 
-    func move(fromOffsets: IndexSet, toOffset: Int) {
-        cities.move(fromOffsets: fromOffsets, toOffset: toOffset)
+    func move(fromOffsets source: IndexSet, toOffset destination: Int) {
+        // Pure stdlib implementation - no SwiftUI dependency
+        let sorted = source.sorted(by: >)
+        var result = cities
+        let moved = sorted.map { result.remove(at: $0) }.reversed()
+        let adjustedDest = destination - source.filter { $0 < destination }.count
+        result.insert(contentsOf: moved, at: adjustedDest)
+        cities = result
         persist()
     }
 
