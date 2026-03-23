@@ -2,7 +2,10 @@ import AppKit
 
 final class WallpaperWindow: NSWindow {
 
+    private let assignedScreen: NSScreen
+
     init(screen: NSScreen) {
+        self.assignedScreen = screen
         super.init(
             contentRect: screen.frame,
             styleMask: [.borderless],
@@ -20,6 +23,6 @@ final class WallpaperWindow: NSWindow {
     }
 
     override func constrainFrameRect(_ frameRect: NSRect, to screen: NSScreen?) -> NSRect {
-        return screen?.frame ?? frameRect
+        return assignedScreen.frame
     }
 }

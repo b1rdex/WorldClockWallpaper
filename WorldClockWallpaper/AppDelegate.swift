@@ -1,7 +1,7 @@
 import AppKit
 import Combine
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate {
     private var wallpaperWindows: [WallpaperWindow] = []
     private var mapControllers: [MapViewController] = []
     private var cancellables = Set<AnyCancellable>()

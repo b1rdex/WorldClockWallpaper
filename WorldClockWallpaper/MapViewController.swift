@@ -1,6 +1,22 @@
 import AppKit
 import WebKit
 
+/// Breaks the retain cycle between WKUserContentController and WKScriptMessageHandler.
+/// WKUserContentController holds a strong ref to its message handler, which would
+/// otherwise prevent MapViewController from being deallocated.
+private final class WeakScriptMessageHandler: NSObject, WKScriptMessageHandler {
+    weak var delegate: (NSObject & WKScriptMessageHandler)?
+
+    init(_ delegate: NSObject & WKScriptMessageHandler) {
+        self.delegate = delegate
+    }
+
+    func userContentController(_ ucc: WKUserContentController,
+                                didReceive message: WKScriptMessage) {
+        delegate?.userContentController(ucc, didReceive: message)
+    }
+}
+
 final class MapViewController: NSViewController, WKScriptMessageHandler {
 
     private var webView: WKWebView!
@@ -11,7 +27,7 @@ final class MapViewController: NSViewController, WKScriptMessageHandler {
 
     override func loadView() {
         let config = WKWebViewConfiguration()
-        config.userContentController.add(self, name: "cityBridge")
+        config.userContentController.add(WeakScriptMessageHandler(self), name: "cityBridge")
         webView = WKWebView(frame: .zero, configuration: config)
         // underPageBackgroundColor avoids any flash of white before the HTML background renders.
         // Deployment target is 13.0, so no availability guard needed.
@@ -25,16 +41,16 @@ final class MapViewController: NSViewController, WKScriptMessageHandler {
     }
 
     private func loadMap() {
-        guard let url = Bundle.main.url(forResource: "map", withExtension: "html",
-                                        subdirectory: "Resources") else {
+        guard let url = Bundle.main.url(forResource: "map", withExtension: "html") else {
             // map.html is only present in the main app bundle, not in the test runner bundle.
             // A missing resource is a configuration error; log it but do not crash.
             print("WorldClockWallpaper: map.html not found in bundle — check Copy Bundle Resources phase")
             return
         }
-        // allowingReadAccessTo grants WKWebView read access to the whole Resources dir,
-        // so it can load the sibling d3, topojson, suncalc, and world-110m.json files.
-        webView.loadFileURL(url, allowingReadAccessTo: url.deletingLastPathComponent())
+        // allowingReadAccessTo grants WKWebView read access to the whole bundle Resources dir,
+        // so it can load sibling d3, topojson, suncalc, and world-110m.json files.
+        let resourceDir = Bundle.main.resourceURL ?? url.deletingLastPathComponent()
+        webView.loadFileURL(url, allowingReadAccessTo: resourceDir)
     }
 
     private func pushCitiesToJS() {
