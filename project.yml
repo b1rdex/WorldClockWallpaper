@@ -30,6 +30,7 @@ targets:
         INFOPLIST_FILE: WorldClockWallpaper/Info.plist
         CODE_SIGN_STYLE: Automatic
         ENABLE_HARDENED_RUNTIME: YES
+        CODE_SIGN_ENTITLEMENTS: WorldClockWallpaper/WorldClockWallpaper.entitlements
     dependencies:
       - sdk: WebKit.framework
       - sdk: Combine.framework
