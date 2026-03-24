@@ -12,6 +12,7 @@
 		380BDA86B0F7B26A9A774D51 /* map.html in Resources */ = {isa = PBXBuildFile; fileRef = C29187E9D7C2A58E4E2B70B1 /* map.html */; };
 		3B1CB6B07CFCC09AAD88F10D /* WallpaperWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79CCEB6C3DEB62314BEE7D66 /* WallpaperWindow.swift */; };
 		40DB99A3609A66504098BA42 /* Combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB6939881C455F847AF244E1 /* Combine.framework */; };
+		49223A06D7C671B495D4FEA1 /* CityLookupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3660CA6BD3E3BA5BA8D46A81 /* CityLookupService.swift */; };
 		4EAABF6B5071693DF3AE377B /* d3.v7.min.js in Resources */ = {isa = PBXBuildFile; fileRef = F3BB9A0B242284279EB52FB6 /* d3.v7.min.js */; };
 		6732B41A2B65D4D7A72C9AE5 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20456FF87A18051A10A60EEB /* ServiceManagement.framework */; };
 		7A479EBBEC2C3780B741B716 /* CityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECADEFAE9FB661D5666631F /* CityManager.swift */; };
@@ -21,6 +22,7 @@
 		986FD0E3A65A64C30B4D1201 /* topojson.v3.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 4A65F91C3AF881557EC9E703 /* topojson.v3.min.js */; };
 		9DB42656387EB4A3592A2BE2 /* world-110m.json in Resources */ = {isa = PBXBuildFile; fileRef = 225D61270CD32AA6AECCE6A5 /* world-110m.json */; };
 		A415DF320BC9AAFBBFE858C1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6845C7EEBB753FD6B4B4A8EA /* WebKit.framework */; };
+		AAE10A47A1639DEBACE88F67 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFDD88D835420CC83AA4AC14 /* CoreLocation.framework */; };
 		B81B370DCB98AE26BED982FE /* WorldClockWallpaperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D42DD708F73CBF6601572EF /* WorldClockWallpaperTests.swift */; };
 		CA28331888B72D140E4E0765 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A3C5C144098D18292A12DE /* AppDelegate.swift */; };
 		D13A317BD5ECBEB2B0195FF1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83596FC2D835CD34E2E49700 /* SettingsView.swift */; };
@@ -44,6 +46,7 @@
 		25A7464A0C17B8D52A2FE2F1 /* WorldClockWallpaper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WorldClockWallpaper.entitlements; sourceTree = "<group>"; };
 		2CEAFC2FE0BD1F812177A75C /* CityManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityManagerTests.swift; sourceTree = "<group>"; };
 		31F1C9EAA39F77F87FAD7940 /* CityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTests.swift; sourceTree = "<group>"; };
+		3660CA6BD3E3BA5BA8D46A81 /* CityLookupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityLookupService.swift; sourceTree = "<group>"; };
 		4A65F91C3AF881557EC9E703 /* topojson.v3.min.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = topojson.v3.min.js; sourceTree = "<group>"; };
 		534BFAB007E36933C160A9F7 /* MenuBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarController.swift; sourceTree = "<group>"; };
 		5D42DD708F73CBF6601572EF /* WorldClockWallpaperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldClockWallpaperTests.swift; sourceTree = "<group>"; };
@@ -53,6 +56,7 @@
 		83596FC2D835CD34E2E49700 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		86BDCDF05DEF96FCDD23C9AC /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		9AEA811509C4D3B990738F5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		AFDD88D835420CC83AA4AC14 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		BB6939881C455F847AF244E1 /* Combine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Combine.framework; path = System/Library/Frameworks/Combine.framework; sourceTree = SDKROOT; };
 		C29187E9D7C2A58E4E2B70B1 /* map.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = map.html; sourceTree = "<group>"; };
 		D6A3C5C144098D18292A12DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +74,7 @@
 				A415DF320BC9AAFBBFE858C1 /* WebKit.framework in Frameworks */,
 				40DB99A3609A66504098BA42 /* Combine.framework in Frameworks */,
 				6732B41A2B65D4D7A72C9AE5 /* ServiceManagement.framework in Frameworks */,
+				AAE10A47A1639DEBACE88F67 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +95,7 @@
 			children = (
 				F3BB9A0B242284279EB52FB6 /* d3.v7.min.js */,
 				C29187E9D7C2A58E4E2B70B1 /* map.html */,
-					4A65F91C3AF881557EC9E703 /* topojson.v3.min.js */,
+				4A65F91C3AF881557EC9E703 /* topojson.v3.min.js */,
 				225D61270CD32AA6AECCE6A5 /* world-110m.json */,
 			);
 			path = Resources;
@@ -110,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				BB6939881C455F847AF244E1 /* Combine.framework */,
+				AFDD88D835420CC83AA4AC14 /* CoreLocation.framework */,
 				20456FF87A18051A10A60EEB /* ServiceManagement.framework */,
 				6845C7EEBB753FD6B4B4A8EA /* WebKit.framework */,
 			);
@@ -131,6 +137,7 @@
 			children = (
 				D6A3C5C144098D18292A12DE /* AppDelegate.swift */,
 				D87CAAAAFB08CBB1C52F3B09 /* City.swift */,
+				3660CA6BD3E3BA5BA8D46A81 /* CityLookupService.swift */,
 				DECADEFAE9FB661D5666631F /* CityManager.swift */,
 				9AEA811509C4D3B990738F5E /* Info.plist */,
 				86BDCDF05DEF96FCDD23C9AC /* MapViewController.swift */,
@@ -225,7 +232,7 @@
 			files = (
 				4EAABF6B5071693DF3AE377B /* d3.v7.min.js in Resources */,
 				380BDA86B0F7B26A9A774D51 /* map.html in Resources */,
-					986FD0E3A65A64C30B4D1201 /* topojson.v3.min.js in Resources */,
+				986FD0E3A65A64C30B4D1201 /* topojson.v3.min.js in Resources */,
 				9DB42656387EB4A3592A2BE2 /* world-110m.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,6 +256,7 @@
 			files = (
 				CA28331888B72D140E4E0765 /* AppDelegate.swift in Sources */,
 				33A0D5342F9486793D50F23E /* City.swift in Sources */,
+				49223A06D7C671B495D4FEA1 /* CityLookupService.swift in Sources */,
 				7A479EBBEC2C3780B741B716 /* CityManager.swift in Sources */,
 				92A6CCA610B6EE03F4B80E7E /* MapViewController.swift in Sources */,
 				90F02892A83B811F77C5ACA9 /* MenuBarController.swift in Sources */,

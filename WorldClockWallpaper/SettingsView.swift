@@ -83,42 +83,60 @@ struct SettingsView: View {
 struct AddCityForm: View {
     @ObservedObject var cityManager: CityManager
     @Binding var isShowing: Bool
-    @State private var name = ""
-    @State private var timezone = ""
-    @State private var lat = ""
-    @State private var lon = ""
+    @State private var query = ""
+    @State private var isLoading = false
+    @State private var errorMessage: String?
+
+    private let lookupService = CityLookupService()
 
     var body: some View {
-        VStack(spacing: 6) {
-            TextField("City name (e.g. Paris)", text: $name)
-            TextField("Timezone (e.g. Europe/Paris)", text: $timezone)
-            HStack {
-                TextField("Latitude (e.g. 48.85)", text: $lat)
-                TextField("Longitude (e.g. 2.35)", text: $lon)
+        VStack(alignment: .leading, spacing: 8) {
+            TextField("City name (e.g. Tokyo, New York)", text: $query)
+                .textFieldStyle(.roundedBorder)
+                .disabled(isLoading)
+                .onSubmit { addCity() }
+
+            if let msg = errorMessage {
+                Text(msg)
+                    .font(.caption)
+                    .foregroundColor(.red)
             }
+
             HStack {
                 Button("Cancel") { isShowing = false }
+                    .disabled(isLoading)
                 Spacer()
-                Button("Add") {
-                    cityManager.add(City(
-                        name: name,
-                        timezone: timezone,
-                        lat: Double(lat) ?? 0,
-                        lon: Double(lon) ?? 0
-                    ))
-                    isShowing = false
+                if isLoading {
+                    ProgressView().controlSize(.small)
+                } else {
+                    Button("Add") { addCity() }
+                        .keyboardShortcut(.return)
+                        .disabled(query.trimmingCharacters(in: .whitespaces).isEmpty)
                 }
-                .disabled(
-                    name.isEmpty ||
-                    timezone.isEmpty ||
-                    TimeZone(identifier: timezone) == nil ||
-                    Double(lat) == nil ||
-                    Double(lon) == nil
-                )
-                .keyboardShortcut(.return)
             }
         }
         .padding(12)
-        .textFieldStyle(.roundedBorder)
+    }
+
+    private func addCity() {
+        let trimmed = query.trimmingCharacters(in: .whitespaces)
+        guard !trimmed.isEmpty else { return }
+        isLoading = true
+        errorMessage = nil
+        Task {
+            do {
+                let city = try await lookupService.lookup(trimmed)
+                await MainActor.run {
+                    isLoading = false
+                    cityManager.add(city)
+                    isShowing = false
+                }
+            } catch {
+                await MainActor.run {
+                    isLoading = false
+                    errorMessage = error.localizedDescription
+                }
+            }
+        }
     }
 }

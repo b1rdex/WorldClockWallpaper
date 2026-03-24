@@ -49,3 +49,28 @@ final class CityManagerTests: XCTestCase {
         XCTAssertEqual(sut.cities[1].name, nameAtZero)
     }
 }
+
+final class CityLookupServiceTests: XCTestCase {
+
+    func test_lookup_knownCity_returnsCity() async throws {
+        let service = CityLookupService()
+        let city = try await service.lookup("Tokyo")
+        // Tokyo is in Asia/Tokyo timezone (UTC+9)
+        XCTAssertFalse(city.name.isEmpty)
+        XCTAssertEqual(city.timezone, "Asia/Tokyo")
+        XCTAssertGreaterThan(city.lat, 30)   // Tokyo ~35.7°N
+        XCTAssertLessThan(city.lat, 40)
+        XCTAssertGreaterThan(city.lon, 135)  // Tokyo ~139.7°E
+        XCTAssertLessThan(city.lon, 145)
+    }
+
+    func test_lookup_unknownCity_throws() async {
+        let service = CityLookupService()
+        do {
+            _ = try await service.lookup("xyzzy_nonexistent_city_12345")
+            XCTFail("Expected error not thrown")
+        } catch {
+            // Expected
+        }
+    }
+}

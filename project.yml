@@ -35,6 +35,7 @@ targets:
       - sdk: WebKit.framework
       - sdk: Combine.framework
       - sdk: ServiceManagement.framework
+      - sdk: CoreLocation.framework
 
   WorldClockWallpaperTests:
     type: bundle.unit-test
