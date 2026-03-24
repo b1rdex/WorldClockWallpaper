@@ -39,9 +39,18 @@ const svg = d3.select("#map")
   .attr("width", width)
   .attr("height", height);
 
-const projection = d3.geoNaturalEarth1()
-  .scale(width / 6.2)
-  .translate([width / 2, height / 2]);
+// ── Projection ────────────────────────────────────────────────────────────────
+// Equirectangular ("cover" scale): fills the entire screen, clips excess edges.
+// scaleForCover() ensures the map always fills both dimensions with no black bars.
+function scaleForCover(w, h) {
+  // Equirectangular maps 360° → width at scale s*2π; 180° → height at scale s*π.
+  return Math.max(w / (2 * Math.PI), h / Math.PI);
+}
+
+const projection = d3.geoEquirectangular()
+  .scale(scaleForCover(width, height))
+  .translate([width / 2, height / 2])
+  .clipExtent([[0, 0], [width, height]]);
 
 const path = d3.geoPath().projection(projection);
 
@@ -51,15 +60,15 @@ const landLayer   = svg.append("g").attr("id", "land");
 const borderLayer = svg.append("g").attr("id", "borders");
 const cityLayer   = svg.append("g").attr("id", "cities");
 
-// ── Night polygon ─────────────────────────────────────────────────────────────
-// Use d3.geoCircle centered on the antisolar point (the point opposite the sun).
-// A circle of radius 90° around the antisolar point exactly equals the night hemisphere.
+// ── Antisolar point ───────────────────────────────────────────────────────────
+// Returns [longitude, latitude] of the point directly opposite the sun.
+// A geoCircle of radius 90° centered here equals exactly the night hemisphere.
 function getAntisolarPoint(date) {
   const utHours = date.getUTCHours() + date.getUTCMinutes() / 60 + date.getUTCSeconds() / 3600;
-  // Longitude where it is solar noon right now (subsolar longitude)
+  // Longitude of solar noon right now (subsolar meridian)
   const subsolarLon = (180 - (utHours - 12) * 15 + 360) % 360 - 180;
-  // Solar declination via day-of-year approximation (±23.45°, peaks at summer/winter solstice)
-  const dayOfYear = Math.floor((date - new Date(Date.UTC(date.getUTCFullYear(), 0, 0))) / 86400000);
+  // Solar declination via day-of-year approximation (±23.45°)
+  const dayOfYear = Math.floor((date - new Date(Date.UTC(date.getUTCFullYear(), 0, 0))) / 86400000); // day 1 = Jan 1
   const declination = 23.45 * Math.sin((2 * Math.PI / 365) * (dayOfYear - 81));
   // Antisolar point is the antipode of the subsolar point
   const antiLon = ((subsolarLon + 180) + 540) % 360 - 180;
@@ -67,14 +76,25 @@ function getAntisolarPoint(date) {
   return [antiLon, antiLat];
 }
 
+// ── Night overlay + terminator line ──────────────────────────────────────────
 function drawNight(date) {
   nightLayer.selectAll("*").remove();
   const [lon, lat] = getAntisolarPoint(date);
-  const nightCircle = d3.geoCircle().center([lon, lat]).radius(90)();
+  const nightGeo = d3.geoCircle().center([lon, lat]).radius(90)();
+
+  // Night: dark semi-transparent gray overlay
   nightLayer.append("path")
-    .datum(nightCircle)
+    .datum(nightGeo)
     .attr("d", path)
-    .attr("fill", "rgba(0, 0, 25, 0.68)");
+    .attr("fill", "rgba(0, 0, 0, 0.52)");
+
+  // Terminator: crisp white border line
+  nightLayer.append("path")
+    .datum(nightGeo)
+    .attr("d", path)
+    .attr("fill", "none")
+    .attr("stroke", "rgba(255, 255, 255, 0.85)")
+    .attr("stroke-width", 1.5);
 }
 
 // ── Land + borders ────────────────────────────────────────────────────────────
@@ -142,14 +162,12 @@ function draw() {
   drawCities();
 }
 
-// ── Load world data ───────────────────────────────────────────────────────────
-// Swift injects map data via window.initMap(topoJsonObject) to avoid
-// file:// fetch restrictions in WKWebView (both sandboxed and non-sandboxed).
+// ── Init (called by Swift after page load) ────────────────────────────────────
 window.initMap = function(data) {
   worldData = data;
   draw();
-  setInterval(() => drawNight(new Date()), 60000); // night zone every 1 min
-  setInterval(updateTimes, 1000);                  // clock digits every 1 sec
+  setInterval(() => drawNight(new Date()), 60000); // update night zone every 1 min
+  setInterval(updateTimes, 1000);                  // update clock digits every 1 sec
 };
 
 // ── Resize ────────────────────────────────────────────────────────────────────
@@ -159,19 +177,20 @@ window.addEventListener("resize", () => {
   resizeTimer = setTimeout(() => {
     width = window.innerWidth; height = window.innerHeight;
     svg.attr("width", width).attr("height", height);
-    projection.scale(width / 6.2).translate([width / 2, height / 2]);
+    projection
+      .scale(scaleForCover(width, height))
+      .translate([width / 2, height / 2])
+      .clipExtent([[0, 0], [width, height]]);
     draw();
   }, 100);
 });
 
 // ── Swift ↔ JS bridge ─────────────────────────────────────────────────────────
-// Swift calls window.updateCities(jsonArray) to push city list
 window.updateCities = function(newCities) {
   cities = newCities;
   drawCities();
 };
 
-// Notify Swift that the page is ready — Swift will respond with updateCities()
 window.webkit?.messageHandlers?.cityBridge?.postMessage("requestCities");
 </script>
 </body>

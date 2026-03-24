@@ -24,10 +24,6 @@ private final class WeakScriptMessageHandler: NSObject, WKScriptMessageHandler {
 
 final class MapViewController: NSViewController, WKScriptMessageHandler, WKNavigationDelegate {
 
-    private static let scriptTagPattern = try! NSRegularExpression(
-        pattern: #"<script src="([^"]+\.js)"></script>"#
-    )
-
     private var webView: WKWebView!
 
     var cities: [City] = [] {
@@ -49,36 +45,22 @@ final class MapViewController: NSViewController, WKScriptMessageHandler, WKNavig
     }
 
     private func loadMap() {
-        guard let htmlURL = Bundle.main.url(forResource: "map", withExtension: "html"),
-              var html = try? String(contentsOf: htmlURL, encoding: .utf8) else {
+        guard let url = Bundle.main.url(forResource: "map", withExtension: "html") else {
             NSLog("WCW: map.html not found in bundle")
             return
         }
-
-        // Inline every <script src="filename.js"></script> from the bundle.
-        // This is required under App Sandbox: WKWebView's WebContent process cannot
-        // read file:// URLs from the app bundle, but Swift can.
-        let range = NSRange(html.startIndex..., in: html)
-        let matches = Self.scriptTagPattern.matches(in: html, range: range)
-
-        // Process in reverse order so string offsets stay valid
-        for match in matches.reversed() {
-            guard let fileNameRange = Range(match.range(at: 1), in: html),
-                  let fileURL = Bundle.main.url(
-                      forResource: String(html[fileNameRange].dropLast(3)),
-                      withExtension: "js"
-                  ),
-                  let src = try? String(contentsOf: fileURL, encoding: .utf8),
-                  let fullMatchRange = Range(match.range(at: 0), in: html) else { continue }
-            html.replaceSubrange(fullMatchRange, with: "<script>\(src)</script>")
-        }
-
-        webView.loadHTMLString(html, baseURL: nil)
+        let resourceDir = Bundle.main.resourceURL ?? url.deletingLastPathComponent()
+        webView.loadFileURL(url, allowingReadAccessTo: resourceDir)
     }
 
     // MARK: - WKNavigationDelegate
 
-    func webView(_ webView: WKWebView, didFailProvisionalNavigation _: WKNavigation!, withError error: Error) {
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation _: WKNavigation!,
+                 withError error: Error) {
+        NSLog("WCW provisional load failed: %@", error.localizedDescription)
+    }
+
+    func webView(_ webView: WKWebView, didFail _: WKNavigation!, withError error: Error) {
         NSLog("WCW load failed: %@", error.localizedDescription)
     }
 
@@ -86,8 +68,7 @@ final class MapViewController: NSViewController, WKScriptMessageHandler, WKNavig
         injectWorldData()
     }
 
-    /// Reads world-110m.json from the bundle in Swift (no file:// fetch in WebView)
-    /// and calls window.initMap(data) which was defined in map.html.
+    /// Reads world-110m.json from the bundle in Swift and calls window.initMap(data).
     private func injectWorldData() {
         guard let jsonURL = Bundle.main.url(forResource: "world-110m", withExtension: "json"),
               let jsonData = try? Data(contentsOf: jsonURL),
