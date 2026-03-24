@@ -1,6 +1,6 @@
 import CoreLocation
 
-enum CityLookupError: LocalizedError {
+enum CityLookupError: LocalizedError, Equatable {
     case noResults
     case noLocation
     case noTimezone

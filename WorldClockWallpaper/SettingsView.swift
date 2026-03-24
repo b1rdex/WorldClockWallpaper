@@ -118,7 +118,9 @@ struct AddCityForm: View {
         .padding(12)
     }
 
+    @MainActor
     private func addCity() {
+        guard !isLoading else { return }
         let trimmed = query.trimmingCharacters(in: .whitespaces)
         guard !trimmed.isEmpty else { return }
         isLoading = true

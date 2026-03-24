@@ -69,8 +69,10 @@ final class CityLookupServiceTests: XCTestCase {
         do {
             _ = try await service.lookup("xyzzy_nonexistent_city_12345")
             XCTFail("Expected error not thrown")
+        } catch let e as CityLookupError {
+            XCTAssertEqual(e, .noResults)
         } catch {
-            // Expected
+            XCTFail("Unexpected error type: \(error)")
         }
     }
 }
