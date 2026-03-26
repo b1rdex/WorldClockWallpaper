@@ -20,6 +20,12 @@
     font-weight: 600;
     pointer-events: none;
   }
+  .city-tz {
+    font-family: -apple-system, "SF Pro Display", sans-serif;
+    fill: #a0a0a0;
+    font-size: 10px;
+    pointer-events: none;
+  }
   .city-dot { fill: #f0c040; }
 </style>
 </head>
@@ -55,6 +61,7 @@ const projection = d3.geoEquirectangular()
 const path = d3.geoPath().projection(projection);
 
 // Layers (back → front)
+const southFill   = svg.append("rect").attr("id", "south-fill").attr("fill", "rgb(86, 86, 86)");
 const landLayer   = svg.append("g").attr("id", "land");
 const borderLayer = svg.append("g").attr("id", "borders");
 const nightLayer  = svg.append("g").attr("id", "night");
@@ -88,9 +95,11 @@ function drawNight(date) {
     .attr("d", path)
     .attr("fill", "rgba(0, 0, 0, .6)");
 
-  // Terminator: crisp white border line
+  // Terminator: draw only the true arc as a LineString so D3 doesn't add
+  // artificial closing edges along the clip rectangle when the polygon wraps.
+  const terminatorLine = { type: "LineString", coordinates: nightGeo.coordinates[0] };
   nightLayer.append("path")
-    .datum(nightGeo)
+    .datum(terminatorLine)
     .attr("d", path)
     .attr("fill", "none")
     .attr("stroke", "rgba(255, 255, 255, 0.85)")
@@ -137,12 +146,19 @@ function drawCities() {
       .attr("dx", 8).attr("dy", 10)
       .attr("data-tz", city.timezone)
       .text(localTime(city.timezone));
+    g.append("text").attr("class", "city-tz")
+      .attr("dx", 8).attr("dy", 23)
+      .attr("data-tz-offset", city.timezone)
+      .text(utcOffset(city.timezone));
   });
 }
 
 function updateTimes() {
   cityLayer.selectAll("text[data-tz]").each(function() {
     d3.select(this).text(localTime(this.dataset.tz));
+  });
+  cityLayer.selectAll("text[data-tz-offset]").each(function() {
+    d3.select(this).text(utcOffset(this.dataset.tzOffset));
   });
 }
 
@@ -154,9 +170,25 @@ function localTime(timezone) {
   } catch { return "--:--"; }
 }
 
+function utcOffset(timezone) {
+  try {
+    const parts = new Intl.DateTimeFormat("en", {
+      timeZone: timezone, timeZoneName: "shortOffset"
+    }).formatToParts(new Date());
+    const tz = parts.find(p => p.type === "timeZoneName")?.value ?? "";
+    return tz.replace("GMT", "UTC");
+  } catch { return ""; }
+}
+
 // ── Full redraw ───────────────────────────────────────────────────────────────
+function updateSouthFill() {
+  const southY = (projection([0, -90]) ?? [0, height])[1];
+  southFill.attr("x", 0).attr("y", southY).attr("width", width).attr("height", height - southY);
+}
+
 function draw() {
   if (!worldData) return;
+  updateSouthFill();
   drawLand();
   drawCities();
   drawNight(new Date());
@@ -197,16 +229,30 @@ window.webkit?.messageHandlers?.cityBridge?.postMessage("requestCities");
 // Auto-bootstraps when opened via HTTP server (not inside Swift/WebKit).
 // Run: make dev — then open http://localhost:8090/map.html
 if (!window.webkit?.messageHandlers?.cityBridge) {
-  fetch('world-110m.json')
+  fetch('world-50m.json')
     .then(r => r.json())
     .then(data => {
       window.initMap(data);
       window.updateCities([
-        { name: "New York", lat: 40.71, lon: -74.01, timezone: "America/New_York" },
-        { name: "London",   lat: 51.51, lon:  -0.13, timezone: "Europe/London"   },
-        { name: "Tokyo",    lat: 35.69, lon: 139.69, timezone: "Asia/Tokyo"      },
-        { name: "Sydney",   lat: -33.87, lon: 151.21, timezone: "Australia/Sydney" },
-        { name: "Moscow",   lat: 55.75, lon:  37.62, timezone: "Europe/Moscow"   },
+        { name: "Anchorage",    lat:  61.22, lon: -149.90, timezone: "America/Anchorage"      },
+        { name: "Los Angeles",  lat:  34.05, lon: -118.24, timezone: "America/Los_Angeles"    },
+        { name: "New York",     lat:  40.71, lon:  -74.01, timezone: "America/New_York"       },
+        { name: "Bogotá",       lat:   4.71, lon:  -74.07, timezone: "America/Bogota"         },
+        { name: "São Paulo",    lat: -23.55, lon:  -46.63, timezone: "America/Sao_Paulo"      },
+        { name: "Buenos Aires", lat: -34.60, lon:  -58.38, timezone: "America/Argentina/Buenos_Aires" },
+        { name: "Berlin",       lat:  52.52, lon:   13.40, timezone: "Europe/Berlin"          },
+        { name: "Tel Aviv",     lat:  32.08, lon:   34.78, timezone: "Asia/Jerusalem"         },
+        { name: "Moscow",       lat:  55.75, lon:   37.62, timezone: "Europe/Moscow"          },
+        { name: "Novosibirsk",  lat:  54.99, lon:   82.90, timezone: "Asia/Novosibirsk"       },
+        { name: "Nairobi",      lat:  -1.29, lon:   36.82, timezone: "Africa/Nairobi"         },
+        { name: "Lagos",        lat:   6.52, lon:    3.38, timezone: "Africa/Lagos"           },
+        { name: "Bangkok",      lat:  13.75, lon:  100.52, timezone: "Asia/Bangkok"           },
+        { name: "Ulaanbaatar",  lat:  47.91, lon:  106.88, timezone: "Asia/Ulaanbaatar"       },
+        { name: "Vladivostok",  lat:  43.12, lon:  131.89, timezone: "Asia/Vladivostok"       },
+        { name: "Beijing",      lat:  39.91, lon:  116.39, timezone: "Asia/Shanghai"          },
+        { name: "Tokyo",        lat:  35.69, lon:  139.69, timezone: "Asia/Tokyo"             },
+        { name: "Petropavlovsk", lat:  53.01, lon:  158.65, timezone: "Asia/Kamchatka"         },
+        { name: "Sydney",       lat: -33.87, lon:  151.21, timezone: "Australia/Sydney"       },
       ]);
     });
 }
