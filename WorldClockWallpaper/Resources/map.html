@@ -104,6 +104,19 @@ function drawNight(date) {
     .attr("fill", "none")
     .attr("stroke", "rgba(255, 255, 255, 0.85)")
     .attr("stroke-width", 1.5);
+
+  // South fill night overlay: if the south pole is in the night hemisphere,
+  // cover the strip below the map projection with the same dark overlay.
+  const southPt = projection([0, -90]);
+  if (southPt && southPt[1] < height) {
+    const southInNight = d3.geoDistance([0, -90], [lon, lat]) < Math.PI / 2;
+    if (southInNight) {
+      nightLayer.append("rect")
+        .attr("x", 0).attr("y", southPt[1])
+        .attr("width", width).attr("height", height - southPt[1])
+        .attr("fill", "rgba(0, 0, 0, .6)");
+    }
+  }
 }
 
 // ── Land + borders ────────────────────────────────────────────────────────────
