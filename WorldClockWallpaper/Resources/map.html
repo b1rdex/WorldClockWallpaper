@@ -10,20 +10,17 @@
   .city-label {
     font-family: -apple-system, "SF Pro Display", sans-serif;
     fill: #e8e8e8;
-    font-size: 12px;
     pointer-events: none;
   }
   .city-time {
     font-family: -apple-system, "SF Pro Display", sans-serif;
     fill: #f0c040;
-    font-size: 13px;
     font-weight: 600;
     pointer-events: none;
   }
   .city-tz {
     font-family: -apple-system, "SF Pro Display", sans-serif;
     fill: #a0a0a0;
-    font-size: 10px;
     pointer-events: none;
   }
   .city-dot { fill: #f0c040; }
@@ -141,25 +138,33 @@ function drawLand() {
   //   .attr("stroke-width", 0.4);
 }
 
+// ── Text scaling ──────────────────────────────────────────────────────────────
+const REF_WIDTH = 1920;
+function textScale() { return Math.min(1, width / REF_WIDTH); }
+
 // ── City pins ─────────────────────────────────────────────────────────────────
 function drawCities() {
   cityLayer.selectAll("*").remove();
+  const s = textScale();
   cities.forEach(city => {
     const projected = projection([city.lon, city.lat]);
     if (!projected) return;
     const [x, y] = projected;
 
     const g = cityLayer.append("g").attr("transform", `translate(${x},${y})`);
-    g.append("circle").attr("class", "city-dot").attr("r", 4);
+    g.append("circle").attr("class", "city-dot").attr("r", 4 * s);
     g.append("text").attr("class", "city-label")
-      .attr("dx", 8).attr("dy", -5)
+      .attr("dx", 8 * s).attr("dy", -5 * s)
+      .attr("font-size", `${12 * s}px`)
       .text(city.name ?? "");
     g.append("text").attr("class", "city-time")
-      .attr("dx", 8).attr("dy", 10)
+      .attr("dx", 8 * s).attr("dy", 10 * s)
+      .attr("font-size", `${13 * s}px`)
       .attr("data-tz", city.timezone)
       .text(localTime(city.timezone));
     g.append("text").attr("class", "city-tz")
-      .attr("dx", 8).attr("dy", 23)
+      .attr("dx", 8 * s).attr("dy", 23 * s)
+      .attr("font-size", `${10 * s}px`)
       .attr("data-tz-offset", city.timezone)
       .text(utcOffset(city.timezone));
   });
