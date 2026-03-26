@@ -170,7 +170,7 @@ function updateTimes() {
 
 function localTime(timezone) {
   try {
-    return new Date().toLocaleTimeString("en-GB", {
+    return new Date().toLocaleTimeString(undefined, {
       timeZone: timezone, hour: "2-digit", minute: "2-digit"
     });
   } catch { return "--:--"; }
