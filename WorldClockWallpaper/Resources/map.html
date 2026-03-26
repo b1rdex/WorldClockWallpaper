@@ -57,11 +57,10 @@ const projection = d3.geoEquirectangular()
 const path = d3.geoPath().projection(projection);
 
 // Layers (back → front)
-const southFill   = svg.append("rect").attr("id", "south-fill").attr("fill", "rgb(86, 86, 86)");
-const landLayer   = svg.append("g").attr("id", "land");
-const borderLayer = svg.append("g").attr("id", "borders");
-const nightLayer  = svg.append("g").attr("id", "night");
-const cityLayer   = svg.append("g").attr("id", "cities");
+const southFill  = svg.append("rect").attr("id", "south-fill").attr("fill", "rgb(86, 86, 86)");
+const landLayer  = svg.append("g").attr("id", "land");
+const nightLayer = svg.append("g").attr("id", "night");
+const cityLayer  = svg.append("g").attr("id", "cities");
 
 // ── Antisolar point ───────────────────────────────────────────────────────────
 // Returns [longitude, latitude] of the point directly opposite the sun.
@@ -118,10 +117,7 @@ function drawNight(date) {
 // ── Land + borders ────────────────────────────────────────────────────────────
 function drawLand() {
   landLayer.selectAll("*").remove();
-  borderLayer.selectAll("*").remove();
   const countries = topojson.feature(worldData, worldData.objects.countries);
-  const borders   = topojson.mesh(worldData, worldData.objects.countries,
-                                  (a, b) => a !== b);
   landLayer.selectAll("path.country")
     .data(countries.features)
     .enter().append("path")
@@ -129,13 +125,6 @@ function drawLand() {
       .attr("d", path)
       .attr("fill", "rgb(86, 86, 86)")
       .attr("stroke", "none");
-
-  // borderLayer.append("path")
-  //   .datum(borders)
-  //   .attr("d", path)
-  //   .attr("fill", "none")
-  //   .attr("stroke", "#444")
-  //   .attr("stroke-width", 0.4);
 }
 
 // ── Text scaling ──────────────────────────────────────────────────────────────
