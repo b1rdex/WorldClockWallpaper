@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d1b2a"/>
+      <stop offset="100%" stop-color="#1a3352"/>
+    </linearGradient>
+    <linearGradient id="globe" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e3d5c"/>
+      <stop offset="100%" stop-color="#0d2137"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4fc3f7" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#4fc3f7" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cityGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffcc44" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#ff8800" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="globeClip">
+      <circle cx="512" cy="512" r="330"/>
+    </clipPath>
+    <filter id="blur4">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+    <filter id="blur12">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+    <filter id="blur20">
+      <feGaussianBlur stdDeviation="20"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="224" fill="url(#bg)"/>
+
+  <!-- Outer glow behind globe -->
+  <circle cx="512" cy="512" r="370" fill="url(#glow)" filter="url(#blur20)"/>
+
+  <!-- Globe base -->
+  <circle cx="512" cy="512" r="330" fill="url(#globe)"/>
+
+  <!-- Grid lines clipped to globe -->
+  <g clip-path="url(#globeClip)" fill="none" stroke="#4fc3f7" stroke-opacity="0.18" stroke-width="1.5">
+    <!-- Latitude lines -->
+    <ellipse cx="512" cy="512" rx="330" ry="70"/>
+    <ellipse cx="512" cy="512" rx="330" ry="165"/>
+    <ellipse cx="512" cy="512" rx="330" ry="280"/>
+    <line x1="182" y1="512" x2="842" y2="512"/>
+    <!-- Longitude lines (vertical ellipses) -->
+    <ellipse cx="512" cy="512" rx="70" ry="330"/>
+    <ellipse cx="512" cy="512" rx="165" ry="330"/>
+    <ellipse cx="512" cy="512" rx="280" ry="330"/>
+    <line x1="512" y1="182" x2="512" y2="842"/>
+  </g>
+
+  <!-- Globe border -->
+  <circle cx="512" cy="512" r="330" fill="none" stroke="#4fc3f7" stroke-opacity="0.35" stroke-width="2"/>
+
+  <!-- Continent blobs (stylized, not geographic) -->
+  <!-- North America -->
+  <path d="M 310 360 C 300 340 320 310 360 305 C 395 300 420 320 435 345 C 450 370 445 400 430 420 C 415 440 390 450 365 445 C 340 440 315 420 310 395 Z"
+        fill="#2d6a9f" fill-opacity="0.55" clip-path="url(#globeClip)"/>
+  <!-- Europe/Africa -->
+  <path d="M 490 310 C 505 295 530 290 550 300 C 570 310 575 335 570 360 C 565 385 550 400 535 415 C 520 430 505 445 495 465 C 485 485 480 510 485 535 C 490 560 505 575 510 595 C 505 610 490 615 475 605 C 460 595 450 575 455 550 C 460 525 455 505 445 490 C 435 475 425 460 430 440 C 435 420 450 408 460 390 C 470 372 475 355 470 335 C 465 315 475 305 490 310 Z"
+        fill="#2d6a9f" fill-opacity="0.55" clip-path="url(#globeClip)"/>
+  <!-- Asia -->
+  <path d="M 560 290 C 580 275 620 270 660 278 C 700 286 730 310 745 335 C 760 360 755 390 740 410 C 725 430 700 440 675 438 C 650 436 625 425 605 410 C 585 395 570 375 558 355 C 546 335 542 310 560 290 Z"
+        fill="#2d6a9f" fill-opacity="0.55" clip-path="url(#globeClip)"/>
+  <!-- Australia -->
+  <path d="M 650 560 C 665 545 690 540 710 548 C 730 556 738 575 735 595 C 732 615 718 628 700 630 C 682 632 665 622 658 605 C 651 588 635 575 650 560 Z"
+        fill="#2d6a9f" fill-opacity="0.55" clip-path="url(#globeClip)"/>
+  <!-- South America -->
+  <path d="M 345 470 C 360 458 380 455 395 462 C 410 469 418 485 420 505 C 422 525 415 545 405 560 C 395 575 380 582 365 578 C 350 574 340 560 338 542 C 336 524 330 506 345 470 Z"
+        fill="#2d6a9f" fill-opacity="0.55" clip-path="url(#globeClip)"/>
+
+  <!-- City dots with glow -->
+  <!-- New York -->
+  <circle cx="390" cy="400" r="16" fill="#ffcc44" fill-opacity="0.25" filter="url(#blur12)"/>
+  <circle cx="390" cy="400" r="6" fill="#ffdd66"/>
+
+  <!-- London -->
+  <circle cx="505" cy="345" r="16" fill="#ffcc44" fill-opacity="0.25" filter="url(#blur12)"/>
+  <circle cx="505" cy="345" r="6" fill="#ffdd66"/>
+
+  <!-- Tokyo -->
+  <circle cx="710" cy="370" r="16" fill="#ffcc44" fill-opacity="0.25" filter="url(#blur12)"/>
+  <circle cx="710" cy="370" r="6" fill="#ffdd66"/>
+
+  <!-- Sydney -->
+  <circle cx="695" cy="575" r="14" fill="#ffcc44" fill-opacity="0.2" filter="url(#blur12)"/>
+  <circle cx="695" cy="575" r="5" fill="#ffdd66"/>
+
+  <!-- Dubai -->
+  <circle cx="610" cy="415" r="14" fill="#ffcc44" fill-opacity="0.2" filter="url(#blur12)"/>
+  <circle cx="610" cy="415" r="5" fill="#ffdd66"/>
+
+  <!-- São Paulo -->
+  <circle cx="380" cy="545" r="14" fill="#ffcc44" fill-opacity="0.2" filter="url(#blur12)"/>
+  <circle cx="380" cy="545" r="5" fill="#ffdd66"/>
+
+  <!-- Clock face overlay in center -->
+  <circle cx="512" cy="512" r="88" fill="#0d1b2a" fill-opacity="0.82"/>
+  <circle cx="512" cy="512" r="88" fill="none" stroke="#4fc3f7" stroke-opacity="0.7" stroke-width="2.5"/>
+
+  <!-- Clock tick marks -->
+  <g stroke="#4fc3f7" stroke-opacity="0.6" stroke-width="2" stroke-linecap="round">
+    <!-- 12 -->
+    <line x1="512" y1="432" x2="512" y2="444"/>
+    <!-- 3 -->
+    <line x1="592" y1="512" x2="580" y2="512"/>
+    <!-- 6 -->
+    <line x1="512" y1="592" x2="512" y2="580"/>
+    <!-- 9 -->
+    <line x1="432" y1="512" x2="444" y2="512"/>
+    <!-- Minor ticks -->
+    <line x1="552" y1="434" x2="549" y2="446"/>
+    <line x1="588" y1="472" x2="576" y2="475"/>
+    <line x1="590" y1="552" x2="578" y2="549"/>
+    <line x1="552" y1="588" x2="549" y2="576"/>
+    <line x1="472" y1="590" x2="475" y2="578"/>
+    <line x1="436" y1="552" x2="448" y2="549"/>
+    <line x1="434" y1="472" x2="446" y2="475"/>
+    <line x1="472" y1="436" x2="475" y2="448"/>
+  </g>
+
+  <!-- Hour hand (pointing ~10 o'clock) -->
+  <line x1="512" y1="512" x2="468" y2="462"
+        stroke="#e0f4ff" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- Minute hand (pointing ~2 o'clock) -->
+  <line x1="512" y1="512" x2="553" y2="446"
+        stroke="#4fc3f7" stroke-width="4.5" stroke-linecap="round"/>
+
+  <!-- Center dot -->
+  <circle cx="512" cy="512" r="6" fill="#4fc3f7"/>
+  <circle cx="512" cy="512" r="3" fill="#ffffff"/>
+</svg>

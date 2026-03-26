@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: macos-14
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Build (Release)
+        run: |
+          xcodebuild \
+            -project WorldClockWallpaper.xcodeproj \
+            -scheme WorldClockWallpaper \
+            -derivedDataPath build/DerivedData \
+            -configuration Release \
+            CODE_SIGN_IDENTITY="-" \
+            build
+
+      - name: Package
+        run: |
+          ditto -c -k --sequesterRsrc --keepParent \
+            "build/DerivedData/Build/Products/Release/WorldClockWallpaper.app" \
+            "WorldClockWallpaper.zip"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: WorldClockWallpaper.zip
+          generate_release_notes: true

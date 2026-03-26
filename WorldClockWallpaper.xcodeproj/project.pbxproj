@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		091607F9ADB2636E9901E1F0 /* world-50m.json in Resources */ = {isa = PBXBuildFile; fileRef = 790996BC2BEDD42E83302EA3 /* world-50m.json */; };
+		0A8EBC93134F2A872F1BCC0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4FE23098C3ABCEB858FBFCF /* Assets.xcassets */; };
 		0CAC55DC5F4AAE99C7BDE851 /* CityManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEAFC2FE0BD1F812177A75C /* CityManagerTests.swift */; };
 		33A0D5342F9486793D50F23E /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = D87CAAAAFB08CBB1C52F3B09 /* City.swift */; };
 		380BDA86B0F7B26A9A774D51 /* map.html in Resources */ = {isa = PBXBuildFile; fileRef = C29187E9D7C2A58E4E2B70B1 /* map.html */; };
@@ -20,7 +22,6 @@
 		90F02892A83B811F77C5ACA9 /* MenuBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534BFAB007E36933C160A9F7 /* MenuBarController.swift */; };
 		92A6CCA610B6EE03F4B80E7E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BDCDF05DEF96FCDD23C9AC /* MapViewController.swift */; };
 		986FD0E3A65A64C30B4D1201 /* topojson.v3.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 4A65F91C3AF881557EC9E703 /* topojson.v3.min.js */; };
-		A1B2C3D4E5F6A7B8C9D0E1F2 /* world-50m.json in Resources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F6A7B8C9D0E1F2A3 /* world-50m.json */; };
 		A415DF320BC9AAFBBFE858C1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6845C7EEBB753FD6B4B4A8EA /* WebKit.framework */; };
 		AAE10A47A1639DEBACE88F67 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFDD88D835420CC83AA4AC14 /* CoreLocation.framework */; };
 		CA28331888B72D140E4E0765 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A3C5C144098D18292A12DE /* AppDelegate.swift */; };
@@ -41,7 +42,6 @@
 /* Begin PBXFileReference section */
 		1DD1DFDB9501E551D96C319B /* WorldClockWallpaper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorldClockWallpaper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20456FF87A18051A10A60EEB /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
-		B2C3D4E5F6A7B8C9D0E1F2A3 /* world-50m.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "world-50m.json"; sourceTree = "<group>"; };
 		25A7464A0C17B8D52A2FE2F1 /* WorldClockWallpaper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WorldClockWallpaper.entitlements; sourceTree = "<group>"; };
 		2CEAFC2FE0BD1F812177A75C /* CityManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityManagerTests.swift; sourceTree = "<group>"; };
 		31F1C9EAA39F77F87FAD7940 /* CityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTests.swift; sourceTree = "<group>"; };
@@ -50,6 +50,7 @@
 		534BFAB007E36933C160A9F7 /* MenuBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarController.swift; sourceTree = "<group>"; };
 		6028E5125410F2AA516DAF8C /* WorldClockWallpaperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WorldClockWallpaperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6845C7EEBB753FD6B4B4A8EA /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		790996BC2BEDD42E83302EA3 /* world-50m.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "world-50m.json"; sourceTree = "<group>"; };
 		79CCEB6C3DEB62314BEE7D66 /* WallpaperWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperWindow.swift; sourceTree = "<group>"; };
 		83596FC2D835CD34E2E49700 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		86BDCDF05DEF96FCDD23C9AC /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -57,6 +58,7 @@
 		AFDD88D835420CC83AA4AC14 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		BB6939881C455F847AF244E1 /* Combine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Combine.framework; path = System/Library/Frameworks/Combine.framework; sourceTree = SDKROOT; };
 		C29187E9D7C2A58E4E2B70B1 /* map.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = map.html; sourceTree = "<group>"; };
+		C4FE23098C3ABCEB858FBFCF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D6A3C5C144098D18292A12DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D87CAAAAFB08CBB1C52F3B09 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		DECADEFAE9FB661D5666631F /* CityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityManager.swift; sourceTree = "<group>"; };
@@ -94,8 +96,8 @@
 				F3BB9A0B242284279EB52FB6 /* d3.v7.min.js */,
 				C29187E9D7C2A58E4E2B70B1 /* map.html */,
 				4A65F91C3AF881557EC9E703 /* topojson.v3.min.js */,
-				B2C3D4E5F6A7B8C9D0E1F2A3 /* world-50m.json */,
-				);
+				790996BC2BEDD42E83302EA3 /* world-50m.json */,
+			);
 			path = Resources;
 			sourceTree = "<group>";
 		};
@@ -104,7 +106,7 @@
 			children = (
 				2CEAFC2FE0BD1F812177A75C /* CityManagerTests.swift */,
 				31F1C9EAA39F77F87FAD7940 /* CityTests.swift */,
-				);
+			);
 			path = WorldClockWallpaperTests;
 			sourceTree = "<group>";
 		};
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				D6A3C5C144098D18292A12DE /* AppDelegate.swift */,
+				C4FE23098C3ABCEB858FBFCF /* Assets.xcassets */,
 				D87CAAAAFB08CBB1C52F3B09 /* City.swift */,
 				3660CA6BD3E3BA5BA8D46A81 /* CityLookupService.swift */,
 				DECADEFAE9FB661D5666631F /* CityManager.swift */,
@@ -198,7 +201,7 @@
 				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					A387AE2E555C5AB5B9CA06CB = {
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -227,11 +230,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A8EBC93134F2A872F1BCC0E /* Assets.xcassets in Resources */,
 				4EAABF6B5071693DF3AE377B /* d3.v7.min.js in Resources */,
 				380BDA86B0F7B26A9A774D51 /* map.html in Resources */,
 				986FD0E3A65A64C30B4D1201 /* topojson.v3.min.js in Resources */,
-				A1B2C3D4E5F6A7B8C9D0E1F2 /* world-50m.json in Resources */,
-				);
+				091607F9ADB2636E9901E1F0 /* world-50m.json in Resources */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
@@ -243,7 +247,7 @@
 			files = (
 				0CAC55DC5F4AAE99C7BDE851 /* CityManagerTests.swift in Sources */,
 				8451F19A5BBBC4FD750CE2FB /* CityTests.swift in Sources */,
-				);
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A4040581AD978680C048C184 /* Sources */ = {
@@ -333,10 +337,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGNING_IDENTITY = "-";
 				CODE_SIGN_ENTITLEMENTS = WorldClockWallpaper/WorldClockWallpaper.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CODE_SIGNING_IDENTITY = "-";
 				ENABLE_HARDENED_RUNTIME = NO;
 				INFOPLIST_FILE = WorldClockWallpaper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -392,10 +396,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGNING_IDENTITY = "-";
 				CODE_SIGN_ENTITLEMENTS = WorldClockWallpaper/WorldClockWallpaper.entitlements;
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CODE_SIGNING_IDENTITY = "-";
 				ENABLE_HARDENED_RUNTIME = NO;
 				INFOPLIST_FILE = WorldClockWallpaper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

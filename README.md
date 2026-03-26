@@ -14,7 +14,23 @@ A macOS menu bar app that renders an interactive world map with live city clocks
 - One wallpaper window per screen; responds to display configuration changes
 - Launch at login support
 
-## Requirements
+## Installation (pre-built)
+
+Download the latest `WorldClockWallpaper.zip` from [Releases](../../releases), unzip, and move `WorldClockWallpaper.app` to `/Applications`.
+
+Since the app is not notarized, macOS will block it on first launch. To open it:
+
+**Option A — Right-click:**
+Right-click the app in Finder → Open → Open (in the dialog that appears).
+
+**Option B — Terminal:**
+```bash
+xattr -cr /Applications/WorldClockWallpaper.app
+```
+
+You only need to do this once.
+
+## Requirements (for building from source)
 
 - macOS 13 Ventura or later
 - Xcode 15 or later

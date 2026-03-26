@@ -22,6 +22,7 @@ targets:
     resources:
       - path: WorldClockWallpaper/Resources
         optional: true
+      - path: WorldClockWallpaper/Assets.xcassets
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.worldclockwallpaper.WorldClockWallpaper
@@ -32,6 +33,7 @@ targets:
         CODE_SIGNING_IDENTITY: "-"
         ENABLE_HARDENED_RUNTIME: NO
         CODE_SIGN_ENTITLEMENTS: WorldClockWallpaper/WorldClockWallpaper.entitlements
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
     dependencies:
       - sdk: WebKit.framework
       - sdk: Combine.framework
