@@ -43,7 +43,7 @@ struct SettingsView: View {
             }
             .onMove { cityManager.move(fromOffsets: $0, toOffset: $1) }
         }
-        .frame(height: min(max(CGFloat(cityManager.cities.count) * 44 + 8, 44), 280))
+        .frame(height: min(max(CGFloat(cityManager.cities.count) * 44 + 8, 44), 280)) // 44pt rows + 8pt padding, max 280pt
     }
 
     private var footerView: some View {
@@ -128,16 +128,12 @@ struct AddCityForm: View {
         Task {
             do {
                 let city = try await lookupService.lookup(trimmed)
-                await MainActor.run {
-                    isLoading = false
-                    cityManager.add(city)
-                    isShowing = false
-                }
+                isLoading = false
+                cityManager.add(city)
+                isShowing = false
             } catch {
-                await MainActor.run {
-                    isLoading = false
-                    errorMessage = error.localizedDescription
-                }
+                isLoading = false
+                errorMessage = error.localizedDescription
             }
         }
     }

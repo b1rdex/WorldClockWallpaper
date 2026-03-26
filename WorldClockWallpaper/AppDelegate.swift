@@ -46,7 +46,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         setupWallpaperWindows()
     }
 
-    func refreshCities() {
+    private func refreshCities() {
         mapControllers.forEach { $0.cities = cityManager.cities }
     }
 }

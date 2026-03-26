@@ -26,13 +26,7 @@ final class CityManager: ObservableObject {
     }
 
     func move(fromOffsets source: IndexSet, toOffset destination: Int) {
-        // Pure stdlib implementation - no SwiftUI dependency
-        let sorted = source.sorted(by: >)
-        var result = cities
-        let moved = sorted.map { result.remove(at: $0) }.reversed()
-        let adjustedDest = destination - source.filter { $0 < destination }.count
-        result.insert(contentsOf: moved, at: adjustedDest)
-        cities = result
+        cities.move(fromOffsets: source, toOffset: destination)
         persist()
     }
 

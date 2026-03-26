@@ -17,9 +17,13 @@ struct City: Codable, Identifiable, Equatable {
 
     /// Current time in this city's timezone, formatted as "HH:mm"
     var localTimeString: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "HH:mm"
-        formatter.timeZone = TimeZone(identifier: timezone) ?? .current
-        return formatter.string(from: Date())
+        City.timeFormatter.timeZone = TimeZone(identifier: timezone) ?? .current
+        return City.timeFormatter.string(from: Date())
     }
+
+    private static let timeFormatter: DateFormatter = {
+        let f = DateFormatter()
+        f.dateFormat = "HH:mm"
+        return f
+    }()
 }
