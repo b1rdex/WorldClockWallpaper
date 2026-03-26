@@ -39,7 +39,18 @@ final class MenuBarController: NSObject {
         if popover.isShown {
             popover.performClose(nil)
         } else {
-            popover.show(relativeTo: button.bounds, of: button, preferredEdge: .maxY)
+            popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+
+            // NSPopover miscalculates position for LSUIElement status-bar apps.
+            // Fix: slide the popover window so its top edge aligns with the button's bottom.
+            if let pw = popover.contentViewController?.view.window,
+               let bw = button.window {
+                let buttonScreen = bw.convertToScreen(button.convert(button.bounds, to: nil))
+                var f = pw.frame
+                f.origin.y = buttonScreen.minY - f.height
+                pw.setFrameOrigin(f.origin)
+            }
+
             popover.contentViewController?.view.window?.makeKey()
         }
     }
