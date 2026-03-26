@@ -68,12 +68,12 @@ final class MapViewController: NSViewController, WKScriptMessageHandler, WKNavig
         injectWorldData()
     }
 
-    /// Reads world-110m.json from the bundle in Swift and calls window.initMap(data).
+    /// Reads world-50m.json from the bundle in Swift and calls window.initMap(data).
     private func injectWorldData() {
-        guard let jsonURL = Bundle.main.url(forResource: "world-110m", withExtension: "json"),
+        guard let jsonURL = Bundle.main.url(forResource: "world-50m", withExtension: "json"),
               let jsonData = try? Data(contentsOf: jsonURL),
               let jsonString = String(data: jsonData, encoding: .utf8) else {
-            NSLog("WCW: world-110m.json not found")
+            NSLog("WCW: world-50m.json not found")
             return
         }
         webView.evaluateJavaScript("window.initMap(\(jsonString))", completionHandler: nil)

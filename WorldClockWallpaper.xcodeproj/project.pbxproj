@@ -21,6 +21,7 @@
 		92A6CCA610B6EE03F4B80E7E /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86BDCDF05DEF96FCDD23C9AC /* MapViewController.swift */; };
 		986FD0E3A65A64C30B4D1201 /* topojson.v3.min.js in Resources */ = {isa = PBXBuildFile; fileRef = 4A65F91C3AF881557EC9E703 /* topojson.v3.min.js */; };
 		9DB42656387EB4A3592A2BE2 /* world-110m.json in Resources */ = {isa = PBXBuildFile; fileRef = 225D61270CD32AA6AECCE6A5 /* world-110m.json */; };
+		A1B2C3D4E5F6A7B8C9D0E1F2 /* world-50m.json in Resources */ = {isa = PBXBuildFile; fileRef = B2C3D4E5F6A7B8C9D0E1F2A3 /* world-50m.json */; };
 		A415DF320BC9AAFBBFE858C1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6845C7EEBB753FD6B4B4A8EA /* WebKit.framework */; };
 		AAE10A47A1639DEBACE88F67 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFDD88D835420CC83AA4AC14 /* CoreLocation.framework */; };
 		B81B370DCB98AE26BED982FE /* WorldClockWallpaperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D42DD708F73CBF6601572EF /* WorldClockWallpaperTests.swift */; };
@@ -43,6 +44,7 @@
 		1DD1DFDB9501E551D96C319B /* WorldClockWallpaper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorldClockWallpaper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20456FF87A18051A10A60EEB /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
 		225D61270CD32AA6AECCE6A5 /* world-110m.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "world-110m.json"; sourceTree = "<group>"; };
+		B2C3D4E5F6A7B8C9D0E1F2A3 /* world-50m.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "world-50m.json"; sourceTree = "<group>"; };
 		25A7464A0C17B8D52A2FE2F1 /* WorldClockWallpaper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WorldClockWallpaper.entitlements; sourceTree = "<group>"; };
 		2CEAFC2FE0BD1F812177A75C /* CityManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityManagerTests.swift; sourceTree = "<group>"; };
 		31F1C9EAA39F77F87FAD7940 /* CityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTests.swift; sourceTree = "<group>"; };
@@ -97,7 +99,8 @@
 				C29187E9D7C2A58E4E2B70B1 /* map.html */,
 				4A65F91C3AF881557EC9E703 /* topojson.v3.min.js */,
 				225D61270CD32AA6AECCE6A5 /* world-110m.json */,
-			);
+				B2C3D4E5F6A7B8C9D0E1F2A3 /* world-50m.json */,
+				);
 			path = Resources;
 			sourceTree = "<group>";
 		};
@@ -234,7 +237,8 @@
 				380BDA86B0F7B26A9A774D51 /* map.html in Resources */,
 				986FD0E3A65A64C30B4D1201 /* topojson.v3.min.js in Resources */,
 				9DB42656387EB4A3592A2BE2 /* world-110m.json in Resources */,
-			);
+				A1B2C3D4E5F6A7B8C9D0E1F2 /* world-50m.json in Resources */,
+				);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
