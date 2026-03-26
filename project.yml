@@ -28,8 +28,9 @@ targets:
         SWIFT_VERSION: 5.9
         MACOSX_DEPLOYMENT_TARGET: "13.0"
         INFOPLIST_FILE: WorldClockWallpaper/Info.plist
-        CODE_SIGN_STYLE: Automatic
-        ENABLE_HARDENED_RUNTIME: YES
+        CODE_SIGN_STYLE: Manual
+        CODE_SIGNING_IDENTITY: "-"
+        ENABLE_HARDENED_RUNTIME: NO
         CODE_SIGN_ENTITLEMENTS: WorldClockWallpaper/WorldClockWallpaper.entitlements
     dependencies:
       - sdk: WebKit.framework

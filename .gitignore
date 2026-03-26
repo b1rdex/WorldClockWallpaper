@@ -16,3 +16,7 @@ DerivedData/
 
 # Claude Code session
 .claude/
+
+# AI workflow artifacts
+CLAUDE.md
+docs/superpowers/
