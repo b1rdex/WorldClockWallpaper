@@ -46,15 +46,14 @@ const svg = d3.select("#map")
   .attr("height", height);
 
 // ── Projection ────────────────────────────────────────────────────────────────
-// Equirectangular ("cover" scale): fills the entire screen, clips excess edges.
-// scaleForCover() ensures the map always fills both dimensions with no black bars.
-function scaleForCover(w, h) {
-  // Equirectangular maps 360° → width at scale s*2π; 180° → height at scale s*π.
-  return Math.max(w / (2 * Math.PI), h / Math.PI - 100);
+// Scale to width: full 360° always visible, map height = screenWidth / 2.
+function scaleForWidth(w) {
+  // Equirectangular maps 360° → scale * 2π pixels wide.
+  return w / (2 * Math.PI);
 }
 
 const projection = d3.geoEquirectangular()
-  .scale(scaleForCover(width, height))
+  .scale(scaleForWidth(width))
   .translate([width / 2, height / 2])
   .clipExtent([[0, 0], [width, height]]);
 
@@ -223,7 +222,7 @@ window.addEventListener("resize", () => {
     width = window.innerWidth; height = window.innerHeight;
     svg.attr("width", width).attr("height", height);
     projection
-      .scale(scaleForCover(width, height))
+      .scale(scaleForWidth(width))
       .translate([width / 2, height / 2])
       .clipExtent([[0, 0], [width, height]]);
     draw();
